@@ -72,5 +72,70 @@ export class CoreStack extends cdk.Stack {
       sourceArn: `arn:aws:connect:${props?.env?.region}:${props?.env?.account}:instance/${CONNECT_INSTANCE_ID}`,
       sourceAccount: props?.env?.account,
     });
+
+    const customerDataTable = new Table(this, "CustomerDataTable", {
+      partitionKey: {
+        name: "PhoneNumber",
+        type: AttributeType.STRING,
+      },
+      billingMode: BillingMode.PAY_PER_REQUEST,
+      tableName: "jam-cc-customer-data",
+    });
+
+    const getCustomerDataLambdaRole = new Role(
+      this,
+      "GetCustomerDataLambdaRole",
+      {
+        assumedBy: new ServicePrincipal("lambda.amazonaws.com"),
+        roleName: "GetCustomerData-LambdaRole",
+        inlinePolicies: {
+          "lambda-policy": new PolicyDocument({
+            statements: [
+              new PolicyStatement({
+                actions: ["dynamoDb:GetItem"],
+                effect: Effect.ALLOW,
+                resources: [customerDataTable.tableArn],
+              }),
+              new PolicyStatement({
+                actions: [
+                  "logs:CreateLogGroup",
+                  "logs:CreateLogStream",
+                  "logs:PutLogEvents",
+                ],
+                effect: Effect.ALLOW,
+                resources: ["*"],
+              }),
+            ],
+          }),
+        },
+      }
+    );
+
+    const getCustomerDataLambda = new NodejsFunction(
+      this,
+      "GetCustomerDataLambda",
+      {
+        bundling: {
+          minify: false,
+        },
+        description: "Get customer data from DynamoDB",
+        entry: "./lib/lambda/core/GetCustomerData.ts",
+        environment: {
+          CUSTOMER_DATA_TABLE_NAME: customerDataTable.tableName,
+        },
+        functionName: "GetCustomerData",
+        handler: "GetCustomerData",
+        memorySize: 128,
+        role: getCustomerDataLambdaRole,
+        runtime: Runtime.NODEJS_20_X,
+        timeout: cdk.Duration.seconds(5),
+      }
+    );
+
+    getCustomerDataLambda.addPermission("conenct-permission", {
+      principal: new ServicePrincipal("connect.amazonaws.com"),
+      sourceArn: `arn:aws:connect:${props?.env?.region}:${props?.env?.account}:instance/${CONNECT_INSTANCE_ID}`,
+      sourceAccount: props?.env?.account,
+    });
   }
 }
