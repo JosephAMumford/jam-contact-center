@@ -2,6 +2,7 @@
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import { CoreStack } from "./stacks/coreStack";
+import { WebsiteStack } from "./stacks/websiteStack";
 
 const app = new cdk.App();
 const environment = {
@@ -12,4 +13,9 @@ const environment = {
 new CoreStack(app, "CoreStack", {
   env: environment,
   stackName: "connect-core-stack",
+});
+
+new WebsiteStack(app, "WebsiteStack", {
+  env: environment,
+  stackName: "website-stack",
 });
