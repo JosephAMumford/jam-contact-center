@@ -50,17 +50,17 @@ const Header: React.FC = () => {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="/">
+        <a className="navbar-item" onClick={() => navigate("/")}>
           JAM
         </a>
       </div>
 
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <a className="navbar-item" href="/home">
+          <a className="navbar-item" onClick={() => navigate("/home")}>
             Home
           </a>
-          <a className="navbar-item" href="/liveSupport">
+          <a className="navbar-item" onClick={() => navigate("/liveSupport")}>
             Live Support
           </a>
         </div>
