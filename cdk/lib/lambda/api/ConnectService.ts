@@ -44,7 +44,7 @@ export class ConnectServiceLambda {
     }
 
     if (
-      event.path === "connect/contact" &&
+      event.path === "/connect/contact" &&
       event.httpMethod === "POST" &&
       event.body
     ) {
@@ -55,7 +55,8 @@ export class ConnectServiceLambda {
           parsedBody["destinationPhoneNumber"],
           this.instanceId,
           parsedBody["contactFlowId"],
-          parsedBody["attributes"]
+          parsedBody["attributes"],
+          parsedBody["attributes"]["queueId"]
         );
 
         if (connectResponse) {

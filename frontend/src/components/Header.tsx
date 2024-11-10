@@ -1,13 +1,30 @@
 import { useNavigate } from "react-router-dom";
+import { capitalize, parseJwt } from "../utilities";
+import { useEffect, useState } from "react";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    if (sessionStorage.getItem("idToken")) {
+      const parsedToken = parseJwt(sessionStorage.getItem("idToken"));
+      if (parsedToken["cognito:username"]) {
+        let userName = capitalize(parsedToken["cognito:username"]);
+        setUserName(userName);
+      }
+    }
+  }, []);
+
   const isAuthenticated = () => {
     const accessToken = sessionStorage.getItem("accessToken");
     return !!accessToken;
   };
 
-  const handleLogin = () => {};
+  const handleLogin = () => {
+    sessionStorage.clear();
+    navigate("/login");
+  };
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -16,10 +33,18 @@ const Header: React.FC = () => {
 
   const getLoginLogoutButton = () => {
     if (isAuthenticated()) {
-      return <button className="button is-primary">Log out</button>;
+      return (
+        <button className="button is-primary" onClick={handleLogout}>
+          Log out
+        </button>
+      );
     }
 
-    return <button className="button is-primary">Log in</button>;
+    return (
+      <button className="button is-primary" onClick={handleLogin}>
+        Log in
+      </button>
+    );
   };
 
   return (
@@ -32,11 +57,18 @@ const Header: React.FC = () => {
 
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <a className="navbar-item">Home</a>
-          <a className="navbar-item">Live Support</a>
+          <a className="navbar-item" href="/home">
+            Home
+          </a>
+          <a className="navbar-item" href="/liveSupport">
+            Live Support
+          </a>
         </div>
 
         <div className="navbar-end">
+          <div className="navbar-item">
+            {userName && <span>{userName}</span>}
+          </div>
           <div className="navbar-item">
             <div className="buttons">{getLoginLogoutButton()}</div>
           </div>

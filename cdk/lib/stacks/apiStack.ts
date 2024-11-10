@@ -98,7 +98,7 @@ export class ApiStack extends cdk.Stack {
       new LambdaIntegration(connectServiceLambda),
       { authorizer: auth, authorizationType: AuthorizationType.COGNITO }
     );
-    connectResource.addCorsPreflight({
+    contactResource.addCorsPreflight({
       allowOrigins: Cors.ALL_ORIGINS,
       allowMethods: ["POST"],
       allowCredentials: true,

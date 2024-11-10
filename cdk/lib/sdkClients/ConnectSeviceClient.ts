@@ -31,13 +31,15 @@ export class ConnectServiceClient {
     destinationPhoneNumber: string,
     instanceId: string,
     contactFlowId: string,
-    attributes: any
+    attributes: any,
+    queueId: string
   ): Promise<StartOutboundVoiceContactCommandOutput> {
     const input: StartOutboundVoiceContactCommandInput = {
       DestinationPhoneNumber: destinationPhoneNumber,
       ContactFlowId: contactFlowId,
       InstanceId: instanceId,
       Attributes: attributes,
+      QueueId: queueId,
     };
 
     return await this.connect.send(new StartOutboundVoiceContactCommand(input));

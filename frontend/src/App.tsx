@@ -6,6 +6,7 @@ import LoginPage from "./pages/loginPage";
 import HomePage from "./pages/homePage";
 import ConfirmUserPage from "./pages/confirmUserPage";
 import "./App.css";
+import LiveSupportPage from "./pages/liveSupportPage";
 
 const App = () => {
   const isAuthenticated = () => {
@@ -32,6 +33,12 @@ const App = () => {
           path="/home"
           element={
             isAuthenticated() ? <HomePage /> : <Navigate replace to="/login" />
+          }
+        />
+        <Route
+          path="/liveSupport"
+          element={
+            isAuthenticated() ? <LiveSupportPage /> : <Navigate replace to="/login" />
           }
         />
       </Routes>

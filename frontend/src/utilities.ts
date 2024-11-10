@@ -10,3 +10,7 @@ export function parseJwt(token: any) {
   );
   return JSON.parse(jsonPayload);
 }
+
+export function capitalize(str: string) {
+  return String(str).charAt(0).toUpperCase() + String(str).slice(1);
+}
