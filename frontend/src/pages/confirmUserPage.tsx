@@ -4,7 +4,7 @@
 import type React from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { confirmSignUp } from "./authService";
+import { confirmSignUp } from "../authService";
 
 const ConfirmUserPage = () => {
   const navigate = useNavigate();

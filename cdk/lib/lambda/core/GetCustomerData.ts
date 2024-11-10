@@ -1,10 +1,10 @@
 import { ConnectContactFlowEvent, Context } from "aws-lambda";
-import { DynamoClient } from "../../sdkClients/DynamoClient";
+import { DynamoServiceClient } from "../../sdkClients/DynamoServiceClient";
 import { ContactFlowEventResponse } from "../constants";
 
 export class GetCustomerDataLambda {
   constructor(
-    private dynamoClient: DynamoClient,
+    private dynamoClient: DynamoServiceClient,
     private customerDataTableName: string
   ) {}
 
@@ -52,7 +52,7 @@ export class GetCustomerDataLambda {
   }
 }
 
-const dynamoClient = new DynamoClient();
+const dynamoClient = new DynamoServiceClient();
 
 export const GetCustomerData = async (
   event: ConnectContactFlowEvent,

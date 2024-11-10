@@ -1,5 +1,5 @@
 import { ConnectContactFlowEvent, Context } from "aws-lambda";
-import { DynamoClient } from "../../sdkClients/DynamoClient";
+import { DynamoServiceClient } from "../../sdkClients/DynamoServiceClient";
 import { ContactFlowEventResponse } from "../constants";
 
 type Prompt = {
@@ -14,7 +14,7 @@ type PromptDynamoItem = {
 
 export class GetPromptsLambda {
   constructor(
-    private dynamoClient: DynamoClient,
+    private dynamoClient: DynamoServiceClient,
     private promptTableName: string
   ) {}
 
@@ -85,7 +85,7 @@ export class GetPromptsLambda {
   }
 }
 
-const dynamoClient = new DynamoClient();
+const dynamoClient = new DynamoServiceClient();
 
 export const GetPrompts = async (
   event: ConnectContactFlowEvent,

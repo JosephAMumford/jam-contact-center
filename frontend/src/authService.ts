@@ -7,7 +7,7 @@ import {
   SignUpCommand,
   ConfirmSignUpCommand,
 } from "@aws-sdk/client-cognito-identity-provider";
-import config from "./config.json";
+import config from "./constants/config.json";
 
 export const cognitoClient = new CognitoIdentityProviderClient({
   region: config.region,

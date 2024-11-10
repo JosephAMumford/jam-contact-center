@@ -21,12 +21,15 @@
     "typescript": "~5.6.3"
   },
   "dependencies": {
+    "@aws-sdk/client-connect": "^3.687.0",
     "@aws-sdk/client-dynamodb": "^3.687.0",
     "@aws-sdk/lib-dynamodb": "^3.687.0",
     "@types/aws-lambda": "^8.10.145",
     "aws-cdk-lib": "2.166.0",
     "constructs": "^10.0.0",
     "esbuild": "^0.24.0",
+    "install": "^0.13.0",
+    "npm": "^10.9.0",
     "source-map-support": "^0.5.21"
   }
 }

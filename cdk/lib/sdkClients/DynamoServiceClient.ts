@@ -6,7 +6,7 @@ import {
   GetCommandOutput,
 } from "@aws-sdk/lib-dynamodb";
 
-export class DynamoClient {
+export class DynamoServiceClient {
   dynamo: DynamoDBDocumentClient;
 
   constructor() {

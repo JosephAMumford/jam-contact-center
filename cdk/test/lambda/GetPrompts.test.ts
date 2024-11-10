@@ -1,5 +1,5 @@
 import { GetCommandOutput } from "@aws-sdk/lib-dynamodb";
-import { DynamoClient } from "../../lib/sdkClients/DynamoClient";
+import { DynamoServiceClient } from "../../lib/sdkClients/DynamoServiceClient";
 import { GetPromptsLambda } from "../../lib/lambda/core/GetPrompts";
 
 let lambda: GetPromptsLambda;
@@ -46,11 +46,11 @@ const lambdaSuccessResponse = {
 };
 
 describe("GetPrompts", () => {
-  const dynamoClient = new DynamoClient();
+  const dynamoClient = new DynamoServiceClient();
 
   beforeEach(() => {
     jest
-      .spyOn<DynamoClient, "getItem">(dynamoClient, "getItem")
+      .spyOn<DynamoServiceClient, "getItem">(dynamoClient, "getItem")
       .mockImplementation((key, table) => {
         return new Promise((resolve, reject) => {
           resolve(mockGetItemResponse);
