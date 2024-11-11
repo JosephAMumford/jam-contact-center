@@ -8,14 +8,14 @@ import { DynamoServiceClient } from "../../lib/sdkClients/DynamoServiceClient";
 
 const dynamoClientMock = mockClient(DynamoDBDocumentClient);
 
-const dynamoClient = new DynamoServiceClient();
+const dynamoServiceClient = new DynamoServiceClient();
 
 const mockDynamoResponse: GetCommandOutput = {
   Item: {},
   $metadata: {},
 };
 
-describe("DynamoClient", () => {
+describe("DynamoServiceClient", () => {
   beforeEach(() => {
     dynamoClientMock.on(GetCommand).resolves(mockDynamoResponse);
   });
@@ -25,7 +25,7 @@ describe("DynamoClient", () => {
   });
 
   test("should return response for getItem api call", async () => {
-    const response = await dynamoClient.getItem(
+    const response = await dynamoServiceClient.getItem(
       { TestKey: "TestKey" },
       "test-table"
     );

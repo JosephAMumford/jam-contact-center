@@ -30,10 +30,15 @@ const HomePage = () => {
             </h2>
             <div className="content">
               <ul>
-                <li>Increased agent productivity</li>
+                <li>Inbound and Outbound Telephony</li>
+                <li>
+                  Agent Workspace application included. Options for custom
+                  applications.
+                </li>
+                <li>Post-call surveys</li>
+                <li>Customer authentication</li>
                 <li>Fast deployment times with CI/Cd processes</li>
                 <li>Seamless integration with AWS ecosystem</li>
-                <li>Automatic security updates</li>
               </ul>
             </div>
           </section>

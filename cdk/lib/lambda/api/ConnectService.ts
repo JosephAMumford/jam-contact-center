@@ -60,7 +60,7 @@ export class ConnectServiceLambda {
         );
 
         if (connectResponse) {
-          responseData = connectResponse.ContactId;
+          responseData = connectResponse;
         }
       } catch (e) {
         console.log(e);
