@@ -88,8 +88,14 @@ const LiveSupportPage: React.FC = () => {
 
       if (response) {
         setCallStarted(true);
+
+        setTimeout(() => {
+          setCallStarted(false);
+        }, 30000);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handlePhonenumberInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -97,6 +103,10 @@ const LiveSupportPage: React.FC = () => {
   };
 
   const formatTime = (time: any) => {
+    if (!time) {
+      return "CLOSED";
+    }
+
     const period = time.Hours < 12 ? "AM" : "PM";
     let hour;
     let minute;

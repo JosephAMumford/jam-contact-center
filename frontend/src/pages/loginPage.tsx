@@ -42,39 +42,41 @@ const LoginPage = () => {
       </section>
       <section className="section is-large">
         <h1 className="title">Sign in to your account</h1>
-        <form onSubmit={handleSignIn}>
-          <div className="field">
-            <label className="label">Username</label>
-            <div className="control">
-              <input
-                className="input"
-                id="email"
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Username"
-                required
-              />
+        <div style={{ maxWidth: "256px" }}>
+          <form onSubmit={handleSignIn}>
+            <div className="field">
+              <label className="label">Username</label>
+              <div className="control">
+                <input
+                  className="input"
+                  id="email"
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Username"
+                  required
+                />
+              </div>
             </div>
-          </div>
-          <div className="field">
-            <label className="label">Password</label>
-            <div className="control">
-              <input
-                className="input"
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-                required
-              />
+            <div className="field">
+              <label className="label">Password</label>
+              <div className="control">
+                <input
+                  className="input"
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Password"
+                  required
+                />
+              </div>
             </div>
-          </div>
-          <button type="submit" className="button is-primary">
-            Sign In
-          </button>
-        </form>
+            <button type="submit" className="button is-primary">
+              Sign In
+            </button>
+          </form>
+        </div>
       </section>
     </div>
   );
